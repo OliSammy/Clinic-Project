@@ -27,6 +27,22 @@ public class Agendamento {
         
     }
     
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Paciente getPaciente() {
         return paciente;
     }

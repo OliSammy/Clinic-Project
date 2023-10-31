@@ -6,7 +6,7 @@ public class Staff {
    private ArrayList<Medico> staff = new ArrayList<Medico>();
    
    public void adicionarMedico(Medico medico) {
-        verificarMedico(medico);
+        verificarMedico(medico);//ajeitar as funções de verificar
         this.staff.add(medico);
    }
    public void removerMedico(Medico medico) {
