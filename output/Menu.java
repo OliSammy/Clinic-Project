@@ -1,6 +1,7 @@
-package telas;
+package output;
 import java.util.Scanner;
-import controladores.*;;
+import controladores.*;
+import entidades.Medico;
 public class Menu {
     int opcao;
     Scanner input = new Scanner(System.in);
@@ -12,23 +13,17 @@ public class Menu {
         System.out.println("\n1.Médicos 2.Paciente 3.Agendamentos 4.Relatórios 5.sair\n\n");
         opcao = input.nextInt();
         switch (opcao) {
-            //Painel dos médicos
             case 1:
                 mostrarMedicos();
                 break;
-            //Painel dos pacientes
             case 2:
                 mostrarPacientes();
                 break;
-            //Painel dos agendamentos
             case 3: 
                mostrarConsultas();
-                break;
-            //Painel dos relatórios
             case 4: 
                mostrarRelatorio();
                 break;
-            //Sair do programa
             case 5: 
                 System.out.println("\nObrigado por usar o programa!");
                 break;
@@ -55,7 +50,14 @@ public class Menu {
         switch (opcao) {
             case 1:
                 System.out.println("\t\t*Cadastrar Médico selecionado*\n");
-                
+                System.out.println("\nDigite o nome do médico:");
+                String nome = input.next();
+                System.out.println("\nDigite a especialidade do médico:");
+                String especialidade = input.next();
+                System.out.println("\nDigite o ID do médico:");
+                int id = input.nextInt();
+                Medico medicoNovo = new Medico(nome, especialidade, id);
+                staff.adicionarMedico(medicoNovo);
                 break;
         
             default:

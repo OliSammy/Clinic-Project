@@ -3,7 +3,6 @@ public class Medico {
     private String nome;
     private String especialidade;
     private int id;
-
     public Medico(String nome, String especialidade, int id) {
         this.nome = nome;
         this.especialidade = especialidade;
