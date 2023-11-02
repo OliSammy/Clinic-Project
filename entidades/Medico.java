@@ -8,10 +8,11 @@ public class Medico {
         this.especialidade = especialidade;
         this.id = id;
     }
-    public void exibirMedico() {
-        System.out.println("Nome: " + this.nome);
-        System.out.println("Especialidade: " + this.especialidade);
-        System.out.println("ID: " + this.id);
+   
+    
+    @Override
+    public String toString() {
+        return "Nome: " + this.nome + "\nEspecialidade: " + this.especialidade + "\nID: " + this.id + "\n\n";
     }
     
     public String getNome() {

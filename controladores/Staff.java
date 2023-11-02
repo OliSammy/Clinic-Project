@@ -6,32 +6,54 @@ public class Staff {
    private ArrayList<Medico> staff = new ArrayList<Medico>();
    
    public void adicionarMedico(Medico medico) {
-        verificarMedico(medico);//ajeitar as funções de verificar
-        this.staff.add(medico);
+        if(!verificarMedico(medico)){
+            this.staff.add(medico);
+            return;
+        }
+        System.out.println("Médico já cadastrado!");    
    }
    public void removerMedico(Medico medico) {
         this.staff.remove(medico);
    }
-   public Medico buscarMedico(int id) {
-        for (Medico medico : this.staff) {
-            if (medico.getId() == id) {
-                return medico;
-            }
-        }
-        return null; 
-    }
-
-    public void listarMedicos() {
-          for (Medico medico : this.staff) {
-                medico.exibirMedico();
-          }
-    }
-   public void verificarMedico(Medico medico) {
+   public void alterarMedico(Medico medico){
         for (Medico medicoCadastrado : this.staff) {
             if (medicoCadastrado.getId() == medico.getId()) {
-                System.out.println("Médico já cadastrado!");
+                medicoCadastrado.setNome(medico.getNome());
+                medicoCadastrado.setEspecialidade(medico.getEspecialidade());
+                System.out.println("Médico alterado com sucesso!");
                 return;
             }
+        System.out.println("Médico não cadastrado no banco de dados");
         }
    }
+public Medico buscarMedico(int id) {
+    for (Medico medico : this.staff) {
+        if (medico.getId() == id) {
+            System.out.println("Médico encontrado!");
+            System.out.println(medico);
+            return medico;
+        }
+    }
+    System.out.println("Médico não cadastrado no banco de dados");
+    return null;
+     
+}
+
+public void listarMedicos() {
+    for (Medico medico : this.staff) {
+        System.out.println(medico);;
+    }
+}
+public void exibirMedico(Medico medico) {
+    System.out.println(medico);
+}
+
+public boolean verificarMedico(Medico medico) {
+    for (Medico medicoCadastrado : this.staff) {
+        if (medicoCadastrado.getId() == medico.getId()) {
+            return true;
+        }
+    }
+    return false;
+}
 }
