@@ -26,15 +26,24 @@ public class Staff {
         System.out.println("Médico não cadastrado no banco de dados");
         }
    }
-public Medico buscarMedico(int id) {
+    public Medico selecionarMedico(int id) {
+        for (Medico medico : this.staff) {
+            if (medico.getId() == id) {
+                return medico;
+            }
+        }
+        return null;
+    }
+    
+    public Medico buscarMedico(int id) {
     for (Medico medico : this.staff) {
-        if (medico.getId() == id) {
+        if (verificarMedico(medico)) {
             System.out.println("Médico encontrado!");
             System.out.println(medico);
             return medico;
         }
     }
-    System.out.println("Médico não cadastrado no banco de dados");
+    System.out.println("\nMédico não cadastrado no banco de dados, voltando ao menu...\n");
     return null;
      
 }
