@@ -34,19 +34,6 @@ public class Staff {
         }
         return null;
     }
-    
-    public Medico buscarMedico(int id) {
-    for (Medico medico : this.staff) {
-        if (verificarMedico(medico)) {
-            System.out.println("Médico encontrado!");
-            System.out.println(medico);
-            return medico;
-        }
-    }
-    System.out.println("\nMédico não cadastrado no banco de dados, voltando ao menu...\n");
-    return null;
-     
-}
 
 public void listarMedicos() {
     for (Medico medico : this.staff) {
