@@ -6,12 +6,9 @@ public class Staff {
    private ArrayList<Medico> staff = new ArrayList<Medico>();
    
    public void adicionarMedico(Medico medico) {
-        if(!verificarMedico(medico)){
             this.staff.add(medico);
             return;
         }
-        System.out.println("Médico já cadastrado!");    
-   }
    public void removerMedico(Medico medico) {
         this.staff.remove(medico);
    }
@@ -20,10 +17,8 @@ public class Staff {
             if (medicoCadastrado.getId() == medico.getId()) {
                 medicoCadastrado.setNome(medico.getNome());
                 medicoCadastrado.setEspecialidade(medico.getEspecialidade());
-                System.out.println("Médico alterado com sucesso!");
                 return;
             }
-        System.out.println("Médico não cadastrado no banco de dados");
         }
    }
     public Medico selecionarMedico(int id) {

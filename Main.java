@@ -1,5 +1,5 @@
 
-import output.Menu;
+import output.MenuPrincipal;
 
 //Dividas técnicas:
 //1. Não existe tratamento de exceções nas funções de input
@@ -7,8 +7,8 @@ import output.Menu;
 //3. As funções dos clientes não foram implementadas
 public class Main {
     public static void main(String[] args) {
-        Menu menuPrincipal = new Menu();
-        menuPrincipal.Principal();
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        menuPrincipal.Inicio();
         
     }
 }

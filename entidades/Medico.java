@@ -12,7 +12,7 @@ public class Medico {
     
     @Override
     public String toString() {
-        return "Nome: " + this.nome + "\nEspecialidade: " + this.especialidade + "\nID: " + this.id + "\n\n";
+        return "\nNome: " + this.nome + "\nEspecialidade: " + this.especialidade + "\nID: " + this.id + "\n\n";
     }
     
     public String getNome() {
