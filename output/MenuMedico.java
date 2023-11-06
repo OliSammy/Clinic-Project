@@ -101,6 +101,7 @@ public class MenuMedico {
                 System.out.println("\nEsse é o médico selecionado:\n"+medicoRemover+ "\n Deseja remover?\n Sim/Nao");
                 String Escolha2 = inputString.nextLine();
                 if (Escolha2.equalsIgnoreCase("Nao")){
+                    System.out.println("\nVoltando ao menu...");
                     return;
                 }
                 staff.removerMedico(medicoRemover);

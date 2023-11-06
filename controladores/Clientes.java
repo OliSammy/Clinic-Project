@@ -11,26 +11,44 @@ public class Clientes {
     public void removerCliente(Paciente cliente) {
         this.clientes.remove(cliente);
     }
-    public void buscarCliente(int id) {
+    public void buscarCliente(long cpf) {
         for (Paciente cliente : this.clientes) {
-            if (cliente.getId() == id) {
+            if (cliente.getCpf() == cpf) {
                 cliente.exibirPaciente();
                 return;
             }
         }
-        System.out.println("Cliente não encontrado!");
     }
-    public void verificarCliente(Paciente cliente) {
+    public void alterarCliente(Paciente cliente) {
         for (Paciente clienteCadastrado : this.clientes) {
-            if (clienteCadastrado.getId()== cliente.getId()) {
-                System.out.println("Cliente já cadastrado!");
+            if (clienteCadastrado.getCpf() == cliente.getCpf()) {
+                clienteCadastrado.setNome(cliente.getNome());
+                clienteCadastrado.setIdade(cliente.getIdade());
+                clienteCadastrado.setGenero(cliente.getGenero());
                 return;
             }
         }
     }
-    public void listarCliente(Paciente cliente){
+    public boolean verificarCliente(Paciente cliente) {
         for (Paciente clienteCadastrado : this.clientes) {
-            clienteCadastrado.exibirPaciente();
+            if (clienteCadastrado.getCpf()== cliente.getCpf()) {
+                System.out.println("Cliente já cadastrado!");
+                return true;
+            }
+        }
+        return false;
+    }
+    public Paciente selecionarCliente(long cpf) {
+        for (Paciente cliente : this.clientes) {
+            if (cliente.getCpf() == cpf) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+    public void listarCliente(){
+        for (Paciente clienteCadastrado : this.clientes) {
+            System.out.println(clienteCadastrado);
         }
     }
 }

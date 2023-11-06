@@ -6,7 +6,8 @@ public class MenuPrincipal {
     int opcao;
     Scanner inputString = new Scanner(System.in);
     Scanner inputInt = new Scanner(System.in);
-    MenuMedico menuMedico = null;
+    MenuMedico menuMedico = new MenuMedico();
+    MenuCliente menuCliente = new MenuCliente();
     
     public MenuPrincipal() {
         menuMedico = new MenuMedico();
@@ -27,7 +28,7 @@ public class MenuPrincipal {
                 menuMedico.mostrarMedicos();
                 break;
             case 2:
-                mostrarPacientes();
+                menuCliente.mostrarPacientes();
                 break;
             case 3: 
                mostrarConsultas();
