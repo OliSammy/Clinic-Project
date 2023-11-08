@@ -1,16 +1,18 @@
 package controladores;
 import java.util.ArrayList;
 import entidades.Medico;
+import Sql.SqlMedico;
 public class Staff {
-
+   private  SqlMedico sql = new SqlMedico();
    private ArrayList<Medico> staff = new ArrayList<Medico>();
    
-   public void adicionarMedico(Medico medico) {
-            this.staff.add(medico);
+   public void adicionarMedico(String nome, String especialidade)throws Exception {
+            sql.adicionarMedico(nome, especialidade);
             return;
         }
-   public void removerMedico(Medico medico) {
-        this.staff.remove(medico);
+   public void removerMedico(int id)throws Exception {
+        sql.removerMedico(id);
+        return;
    }
    public void alterarMedico(Medico medico){
         for (Medico medicoCadastrado : this.staff) {
@@ -35,16 +37,8 @@ public void listarMedicos() {
         System.out.println(medico);;
     }
 }
-public void exibirMedico(Medico medico) {
-    System.out.println(medico);
+public void buscarMedico(int id) throws Exception {
+    sql.buscarMedico(id);
 }
 
-public boolean verificarMedico(Medico medico) {
-    for (Medico medicoCadastrado : this.staff) {
-        if (medicoCadastrado.getId() == medico.getId()) {
-            return true;
-        }
-    }
-    return false;
-}
 }

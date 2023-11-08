@@ -13,7 +13,7 @@ public class MenuPrincipal {
         menuMedico = new MenuMedico();
     }
 
-    public void Inicio() {
+    public void Inicio() throws Exception{
         while (true){
         System.out.println("\nBem-Vindo à Clinica dos Viados");
         System.out.println("\nPara prosseguimos com o programa selecione uma opção abaixo:");
