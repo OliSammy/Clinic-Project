@@ -21,16 +21,51 @@ public class SqlMedico {
         comandossql.close();
         connection.close();
     }
-    public void buscarMedico(int id) throws SQLException {
+    public boolean selecionarMedico(int id) throws SQLException {
         connection = DriverManager.getConnection(url);
         PreparedStatement comandossql = connection.prepareStatement("SELECT * FROM Medico WHERE Id_med = ?");
         comandossql.setInt(1, id);
         ResultSet resultado = comandossql.executeQuery();
-        while (resultado.next()) {
-            System.out.println("ID: " + resultado.getInt("id") + "\nNome: " + resultado.getString("nome") + "\nEspecialidade: " + resultado.getString("especialidade"));
-        }
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Nenhum resultado encontrado.");
+            return false;
+            } else {
+                while (resultado.next()) {
+                    System.out.println("\nEsse é o médico buscado:");
+                    System.out.println("\nID: " + resultado.getInt("Id_med") + "\nNome: " + resultado.getString("Nome") + "\nEspecialidade: " + resultado.getString("especialidade"));
+                }
+        
+            }
+        resultado.close();
+        comandossql.close();
+        connection.close();
+        return true;
+    }    
+    public void alterarMedico(int id, String nome, String especialidade) throws SQLException {
+        connection = DriverManager.getConnection(url);
+        PreparedStatement comandossql = connection.prepareStatement("UPDATE Medico SET Nome = ?, especialidade = ? WHERE Id_med = ?");
+        comandossql.setString(1, nome);
+        comandossql.setString(2, especialidade);
+        comandossql.setInt(3, id);
+        comandossql.executeUpdate();
+        comandossql.close();
+        connection.close();
+    }
+    public void listarMedicos() throws SQLException {
+        connection = DriverManager.getConnection(url);
+        PreparedStatement comandossql = connection.prepareStatement("SELECT * FROM Medico");
+        ResultSet resultado = comandossql.executeQuery();
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Não existe médicos cadastrados.");
+            } else {
+                while (resultado.next()) {
+                    System.out.println("\nID: " + resultado.getInt("Id_med") + "\nNome: " + resultado.getString("Nome") + "\nEspecialidade: " + resultado.getString("especialidade"));
+                }
+        
+            }
         resultado.close();
         comandossql.close();
         connection.close();
     }
 }
+

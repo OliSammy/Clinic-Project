@@ -14,31 +14,18 @@ public class Staff {
         sql.removerMedico(id);
         return;
    }
-   public void alterarMedico(Medico medico){
-        for (Medico medicoCadastrado : this.staff) {
-            if (medicoCadastrado.getId() == medico.getId()) {
-                medicoCadastrado.setNome(medico.getNome());
-                medicoCadastrado.setEspecialidade(medico.getEspecialidade());
-                return;
-            }
-        }
+   public void alterarMedico(String nome, String especialidade, int id)throws Exception {
+        sql.alterarMedico(id, nome, especialidade);
    }
-    public Medico selecionarMedico(int id) {
-        for (Medico medico : this.staff) {
-            if (medico.getId() == id) {
-                return medico;
-            }
-        }
-        return null;
+public void listarMedicos()throws Exception {
+   sql.listarMedicos();
+}
+public boolean selecionarMedico(int id) throws Exception {
+    if (sql.selecionarMedico(id)) {
+        return true;
     }
+    return false;
+}
 
-public void listarMedicos() {
-    for (Medico medico : this.staff) {
-        System.out.println(medico);;
-    }
-}
-public void buscarMedico(int id) throws Exception {
-    sql.buscarMedico(id);
-}
 
 }

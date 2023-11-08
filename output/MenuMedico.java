@@ -1,7 +1,6 @@
 package output;
 import java.util.Scanner;
 import controladores.Staff;
-import entidades.Medico;
 public class MenuMedico {
     int opcao;
     Scanner inputString = new Scanner(System.in);
@@ -39,55 +38,33 @@ public class MenuMedico {
             System.out.println("\t\t\n*Alterar Médico selecionado*");
             System.out.println("\nDigite o ID do médico que deseja alterar:");
             int idAlterar = inputInt.nextInt();
-            Medico medico = staff.selecionarMedico(idAlterar);
-            if (medico == null) {
-                System.out.println("\nMédico não encontrado, voltando ao menu...");
-                return;
-            } 
-                System.out.println("\nEsse é o médico selecionado:\n"+medico+ "\n Deseja alterar?\n Sim/Nao");
-                String Escolha = inputString.nextLine();            
-                if (Escolha.equalsIgnoreCase("Nao")){
-                    System.out.println("\nVoltando ao menu...");
-                    break;     
-                   } 
-                    System.out.println("\nQual dado você deseja alterar\n1.Nome 2.Especialidade 3.ID");
-                    opcao = inputInt.nextInt();
-                    //Alterar nome
-                while (opcao != 1 && opcao != 2 && opcao != 3) {
-                        System.out.println("\nOpção inválida, tente novamente!");
-                        opcao = inputInt.nextInt();
-                        
-                }
-                if (opcao == 1) {
-                        System.out.println("\nDigite o novo nome do médico:");
-                        String nomeAlterar = inputString.nextLine(); 
-                        Medico medicoAlterar = new Medico(nomeAlterar, medico.getEspecialidade(), medico.getId());
-                        staff.alterarMedico(medicoAlterar);
-                        System.out.println( "\nMédico alterado com sucesso!");
-                        break;
-                }if(opcao==2) {
-                    System.out.println("\nDigite a nova especialidade do médico:");
-                    String especialidadeAlterar = inputString.nextLine();
-                    Medico medicoAlterar = new Medico(medico.getNome(), especialidadeAlterar, medico.getId());
-                    staff.alterarMedico(medicoAlterar);
-                    System.out.println("\nMédico alterado com sucesso!");
-                    break;
-                }if(opcao==3) {
-                    System.out.println("\nDigite o novo ID do médico:");
-                    int idAlterar2 = inputInt.nextInt();
-                    Medico medicoAlterar = new Medico(medico.getNome(), medico.getEspecialidade(), idAlterar2);
-                    staff.alterarMedico(medicoAlterar);
-                    System.out.println("\nMédico alterado com sucesso!");
-                    break;
-                }
-               
+            if(staff.selecionarMedico(idAlterar)){
+            System.out.println("\nDeseja altera-lo? 1.Sim 2.Não");
+            int opcaoAlterar = inputInt.nextInt();
+            if(opcaoAlterar==1){
+                System.out.println("\nDigite o novo nome do médico:");
+                String nomeAlterar = inputString.nextLine();
+                System.out.println("\nDigite a nova especialidade do médico:");
+                String especialidadeAlterar = inputString.nextLine();
+                staff.alterarMedico(nomeAlterar,especialidadeAlterar,idAlterar);
+                System.out.println("\nMédico alterado com sucesso!");
+            }
+        }
+                break;
             //Remover Médico
             case 3:
                 System.out.println("\t\t*Remover Médico selecionado*\n");
                 System.out.println("\nDigite o ID do médico que deseja remover:");
                 int idRemover = inputInt.nextInt();
-                
+                int opcaoRemover = inputInt.nextInt();
+                staff.selecionarMedico(idRemover);
+                if(opcaoRemover==1){
                 staff.removerMedico(idRemover);
+                System.out.println("\nMédico removido com sucesso com sucesso!");
+            }
+            else{
+                System.out.println("\nNenhum dado alterado, voltando ao menu...");
+            }
                 System.out.println("\nMédico removido com sucesso!");
                 break;
         
@@ -96,7 +73,7 @@ public class MenuMedico {
             System.out.println("\t\t*Pesquisar Médico selecionado*\n");
             System.out.println("\nDigite o ID do médico que deseja pesquisar:");
             int idPesquisar = inputInt.nextInt();
-            staff.buscarMedico(idPesquisar);
+            staff.selecionarMedico(idPesquisar);
                 break;
             default:
             System.out.println("\nOpção inválida, tente novamente!");
