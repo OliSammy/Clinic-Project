@@ -2,17 +2,15 @@ package entidades;
 public class Medico {
     private String nome;
     private String especialidade;
-    private int id;
-    public Medico(String nome, String especialidade, int id) {
+    public Medico(String nome, String especialidade) {
         this.nome = nome;
         this.especialidade = especialidade;
-        this.id = id;
     }
    
     
     @Override
     public String toString() {
-        return "\nNome: " + this.nome + "\nEspecialidade: " + this.especialidade + "\nID: " + this.id + "\n\n";
+        return "\nNome: " + this.nome + "\nEspecialidade: " + this.especialidade + "\n";
     }
     
     public String getNome() {
@@ -29,13 +27,5 @@ public class Medico {
 
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

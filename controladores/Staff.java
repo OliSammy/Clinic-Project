@@ -1,10 +1,8 @@
 package controladores;
-import java.util.ArrayList;
-import entidades.Medico;
 import Sql.SqlMedico;
 public class Staff {
    private  SqlMedico sql = new SqlMedico();
-   private ArrayList<Medico> staff = new ArrayList<Medico>();
+
    
    public void adicionarMedico(String nome, String especialidade)throws Exception {
             sql.adicionarMedico(nome, especialidade);

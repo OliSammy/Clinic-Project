@@ -48,42 +48,51 @@ public class MenuMedico {
                 String especialidadeAlterar = inputString.nextLine();
                 staff.alterarMedico(nomeAlterar,especialidadeAlterar,idAlterar);
                 System.out.println("\nMédico alterado com sucesso!");
+                break;
             }
         }
-                break;
             //Remover Médico
             case 3:
                 System.out.println("\t\t*Remover Médico selecionado*\n");
                 System.out.println("\nDigite o ID do médico que deseja remover:");
                 int idRemover = inputInt.nextInt();
-                int opcaoRemover = inputInt.nextInt();
-                staff.selecionarMedico(idRemover);
+                if(staff.selecionarMedico(idRemover)){
+                System.out.println("\nDeseja remove-lo? 1.Sim 2.Não");  
+                int opcaoRemover = inputInt.nextInt(); 
                 if(opcaoRemover==1){
                 staff.removerMedico(idRemover);
                 System.out.println("\nMédico removido com sucesso com sucesso!");
+                break;
             }
             else{
                 System.out.println("\nNenhum dado alterado, voltando ao menu...");
-            }
-                System.out.println("\nMédico removido com sucesso!");
                 break;
-        
+            }
+        }
+
             //Pesquisar Médico
             case 4:
             System.out.println("\t\t*Pesquisar Médico selecionado*\n");
             System.out.println("\nDigite o ID do médico que deseja pesquisar:");
             int idPesquisar = inputInt.nextInt();
-            staff.selecionarMedico(idPesquisar);
+            if(staff.selecionarMedico(idPesquisar)){
                 break;
-            default:
-            System.out.println("\nOpção inválida, tente novamente!");
+            }
+            else{
+                System.out.println("\nMédico não encontrado!");
+            }
                 break;
 
             //Listar Médicos
             case 5:
                 System.out.println("\t\t*Listar Médicos selecionado*\n");
-                System.out.println("\nEsses são os médicos cadastrados:");
                 staff.listarMedicos();
+                break;
+
+                 default:
+            System.out.println("\nOpção inválida, tente novamente!");
+                break;
+
             }
         }
     }

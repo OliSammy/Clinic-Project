@@ -27,26 +27,23 @@ public class MenuCliente {
                 System.out.println("\nDigite o nome do paciente:");
                 String nome = inputString.nextLine();
                 System.out.println("\nDigite a idade do paciente:");
-                int idade = inputInt.nextInt();
+                String idade = inputString.nextLine();
                 System.out.println("\nDigite o gênero do paciente:");
                 String genero = inputString.nextLine();
                 System.out.println("\nDigite o CPF do paciente:");
                 long cpf = inputInt.nextLong();
-                Paciente pacienteNovo = new Paciente(nome, idade, genero, cpf);
-                if(cliente.verificarCliente(pacienteNovo)){
-                    System.out.println("\nJá existe um paciente com esse CPF, voltando ao menu...");
-                    break;
+                try {
+                    cliente.adicionarCliente(nome, idade, genero, cpf);
+                } catch (Exception e) {
+                    System.out.println("Erro ao adicionar paciente: " + e.getMessage());
                 }
-                cliente.adicionarCliente(pacienteNovo);
-                System.out.println("\nPaciente cadastrado com sucesso!");
                 break;
-
-            //Alterar Paciente
-            case 2:
-            System.out.println("\t\t\n*Alterar Paciente selecionado*");
-            System.out.println("\nDigite o CPF do paciente que deseja alterar:");
-            int cpfAlterar = inputInt.nextInt();
-            Paciente paciente = cliente.selecionarCliente(cpfAlterar);
+                //Alterar Paciente
+                case 2:
+                System.out.println("\t\t\n*Alterar Paciente selecionado*");
+                System.out.println("\nDigite o CPF do paciente que deseja alterar:");
+                int cpfAlterar = inputInt.nextInt();
+                Paciente paciente = cliente.selecionarCliente(cpfAlterar);
             if (paciente == null) {
                 System.out.println("\nPaciente não encontrado, voltando ao menu...");
                 return;
