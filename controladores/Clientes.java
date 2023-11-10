@@ -8,8 +8,8 @@ public class Clientes {
     private SqlCliente sql= new SqlCliente();
 
     public void adicionarCliente(String nome, String idade, String genero, long cpf) throws Exception {
-        if (sql.verificarCliente(cpf)){
-            System.out.println("Paciente já adicionado");
+        if (sql.verificarClienteExiste(cpf)){
+            System.out.println("Paciente já existe");
         }
         else{
             sql.adicionarCliente(cpf, nome, genero, idade);
@@ -17,39 +17,23 @@ public class Clientes {
         }
     }
 
-    public void removerCliente(Paciente cliente) {
-        this.clientes.remove(cliente);
+    public void removerCliente(long cpf)throws Exception {
+        sql.removerCliente(cpf);
+        return;
     }
-    public void buscarCliente(long cpf) {
-        for (Paciente cliente : this.clientes) {
-            if (cliente.getCpf() == cpf) {
-                cliente.exibirPaciente();
-                return;
-            }
-        }
-    }
-    public void alterarCliente(Paciente cliente) {
-        for (Paciente clienteCadastrado : this.clientes) {
-            if (clienteCadastrado.getCpf() == cliente.getCpf()) {
-                clienteCadastrado.setNome(cliente.getNome());
-                clienteCadastrado.setIdade(cliente.getIdade());
-                clienteCadastrado.setGenero(cliente.getGenero());
-                return;
-            }
-        }
+ 
+    public void alterarCliente(long cpf, String nome, String genero, String idade)throws Exception{
+        sql.alterarCliente(cpf, nome, genero, idade);
     }
 
-    public Paciente selecionarCliente(long cpf) {
-        for (Paciente cliente : this.clientes) {
-            if (cliente.getCpf() == cpf) {
-                return cliente;
-            }
+    public boolean selecionarCliente(long cpf) throws Exception{
+        if (sql.selecionarCliente(cpf)){
+            return true;
         }
-        return null;
+        return false;
+      
     }
-    public void listarCliente(){
-        for (Paciente clienteCadastrado : this.clientes) {
-            System.out.println(clienteCadastrado);
-        }
+    public void listarClientes()throws Exception{
+        sql.listarClientes();
     }
 }

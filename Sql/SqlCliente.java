@@ -35,7 +35,13 @@ public class SqlCliente {
         comandossql.setLong(1, cpf);
         ResultSet resultado = comandossql.executeQuery();
         if(!resultado.isBeforeFirst()){
+            System.out.println("Nenhum resultado encontrado.");
             return false;
+        }else{
+            while(resultado.next()){
+                System.out.println("\nEsse é o paciente buscado:");
+                System.out.println("\nCPF: " + resultado.getLong("CPF") + "\nNome: " + resultado.getString("Nome") + "\nGênero: " + resultado.getString("Gênero") + "\nData de Nascimento: " + resultado.getString("Data_de_Nascimento"));
+            }
         }
         comandossql.executeUpdate();
         comandossql.close();
@@ -43,15 +49,67 @@ public class SqlCliente {
         return true;
     }
 
-    public void buscarCliente(long cpf) throws SQLException {
+    public boolean verificarClienteExiste(Long cpf) throws SQLException{
+        connection = DriverManager.getConnection(url);
+        PreparedStatement comandossql = connection.prepareStatement("SELECT * FROM Paciente where CPF = ?");
+        comandossql.setLong(1, cpf);
+        ResultSet resultado = comandossql.executeQuery();
+        if(!resultado.isBeforeFirst()){
+            return false;
+        }else{
+            while(resultado.next()){
+                System.out.println("\nEsse é o paciente buscado:");
+                System.out.println("\nCPF: " + resultado.getLong("CPF") + "\nNome: " + resultado.getString("Nome") + "\nGênero: " + resultado.getString("Gênero") + "\nData de Nascimento: " + resultado.getString("Data_de_Nascimento"));
+            }
+        }
+        comandossql.executeUpdate();
+        comandossql.close();
+        connection.close();
+        return true;
+    }
+    public boolean selecionarCliente(long cpf) throws SQLException{
         connection = DriverManager.getConnection(url);
         PreparedStatement comandossql = connection.prepareStatement("SELECT * FROM Paciente WHERE CPF = ?");
         comandossql.setLong(1, cpf);
         ResultSet resultado = comandossql.executeQuery();
-        while (resultado.next()) {
-            //nao entendi
-            System.out.println("ID: " + resultado.getInt("id") + "\nNome: " + resultado.getString("nome") + "\nEspecialidade: " + resultado.getString("especialidade"));
-        }
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Nenhum resultado encontrado.");
+            return false;
+            } else {
+                while (resultado.next()) {
+                    System.out.println("\nEsse é o paciente buscado:");
+                    System.out.println("\nCPF: " + resultado.getLong("CPF") + "\nNome: " + resultado.getString("Nome") + "\nGênero: " + resultado.getString("Gênero") + "\nData de Nascimento: " + resultado.getString("Data_de_Nascimento"));
+                }
+                
+            }
+        resultado.close();
+        comandossql.close();
+        connection.close();
+        return true;
+    }
+    public void alterarCliente(long cpf, String nome, String genero, String idade) throws SQLException {
+        connection = DriverManager.getConnection(url);
+        PreparedStatement comandossql = connection.prepareStatement("UPDATE Paciente SET Nome = ?, Gênero = ?, Data_de_Nascimento = ? WHERE CPF = ?");
+        comandossql.setString(1, nome);
+        comandossql.setString(2, genero);
+        comandossql.setString(3, idade);
+        comandossql.setLong(4, cpf);
+        comandossql.executeUpdate();
+        comandossql.close();
+        connection.close();
+    }
+    public void listarClientes() throws SQLException {
+        connection = DriverManager.getConnection(url);
+        PreparedStatement comandossql = connection.prepareStatement("SELECT * FROM Paciente");
+        ResultSet resultado = comandossql.executeQuery();
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Não existe pacientes cadastrados.");
+            } else {
+                while (resultado.next()) {
+                    System.out.println("\nCPF: " + resultado.getLong("CPF") + "\nNome: " + resultado.getString("Nome") + "\nGênero: " + resultado.getString("Gênero") + "\nData de Nascimento: " + resultado.getString("Data_de_Nascimento"));
+                }
+        
+            }
         resultado.close();
         comandossql.close();
         connection.close();
