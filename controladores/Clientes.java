@@ -1,10 +1,7 @@
 package controladores;
-import java.util.ArrayList;
-import entidades.Paciente;
 import Sql.SqlCliente;
 
 public class Clientes {
-    private ArrayList<Paciente> clientes = new ArrayList<Paciente>();
     private SqlCliente sql= new SqlCliente();
 
     public void adicionarCliente(String nome, String idade, String genero, long cpf) throws Exception {
