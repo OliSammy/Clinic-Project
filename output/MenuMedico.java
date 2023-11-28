@@ -35,7 +35,8 @@ public class MenuMedico {
                         staff.adicionarMedico(nome, especialidade);
                         System.out.println("\nMédico cadastrado com sucesso!");
                     } catch (Exception e) {
-                        System.out.println("Erro ao adicionar médico: Já existe paciente com esse ccpf" + e.getMessage());
+                        System.out
+                                .println("Erro ao adicionar médico! " + e.getMessage()); // AQUI!
                         break;
                     }
                     break;
@@ -94,27 +95,27 @@ public class MenuMedico {
                     System.out.println("\t\t*Pesquisar Médico selecionado*\n");
                     System.out.println("\nDigite o ID do médico que deseja pesquisar:");
                     int idPesquisar = inputInt.nextInt();
-                    try{
-                    if (staff.selecionarMedico(idPesquisar)) {
+                    try {
+                        if (staff.selecionarMedico(idPesquisar)) {
+                            break;
+                        } else {
+                            System.out.println("\nMédico não encontrado!");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Erro ao pesquisar médico: " + e.getMessage());
                         break;
-                    } else {
-                        System.out.println("\nMédico não encontrado!");
                     }
-                } catch (Exception e) {
-                    System.out.println("Erro ao pesquisar médico: " + e.getMessage());
-                    break;
-                }
 
-                // Listar Médicos
+                    // Listar Médicos
                 case 5:
-                try{
-                    System.out.println("\t\t*Listar Médicos selecionado*\n");
-                    staff.listarMedicos();
-                    break;
-                } catch (Exception e) {
-                    System.out.println("Erro ao listar médicos: " + e.getMessage());
-                    break;
-                }
+                    try {
+                        System.out.println("\t\t*Listar Médicos selecionado*\n");
+                        staff.listarMedicos();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("Erro ao listar médicos: " + e.getMessage());
+                        break;
+                    }
                 default:
                     System.out.println("\nOpção inválida, tente novamente!");
                     break;

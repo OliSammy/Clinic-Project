@@ -18,7 +18,7 @@ public class MenuCliente {
         while (true) {
             System.out.println("\t\t*Menu Pacientes selecionado*");
             System.out.println("\nSelecione uma opção abaixo:");
-            System.out.println("\n1.Cadastrar 2.Alterar 3.Remover 4.Perquisar 5.Listar 6.voltar");
+            System.out.println("\n1.Cadastrar 2.Alterar 3.Remover 4.Pesquisar 5.Listar 6.voltar");
             opcao = inputInt.nextInt();
             if (opcao == 6) {
                 break;
@@ -49,24 +49,24 @@ public class MenuCliente {
                     long cpfAlterar = inputInt.nextLong();
                     try {
                         if (cliente.selecionarCliente(cpfAlterar)) {
-                             System.out.println("\nDeseja altera-lo? 1.Sim 2.Não");
-                        int opcaoAlterar = inputInt.nextInt();
-                        if (opcaoAlterar == 1) {
-                            System.out.println("\nDigite o novo nome do paciente:");
-                            String nomeAlterar = inputString.nextLine();
-                            System.out.println("\nDigite a nova idade do paciente:");
-                            String idadeAlterar = inputString.nextLine();
-                            System.out.println("\nDigite o novo gênero do paciente:");
-                            String generoAlterar = inputString.nextLine();
-                            try {
-                                cliente.alterarCliente(cpfAlterar, nomeAlterar, generoAlterar, idadeAlterar);
-                            } catch (Exception e) {
-                                System.out.println("Erro ao alterar paciente: " + e.getMessage());
+                            System.out.println("\nDeseja altera-lo? 1.Sim 2.Não");
+                            int opcaoAlterar = inputInt.nextInt();
+                            if (opcaoAlterar == 1) {
+                                System.out.println("\nDigite o novo nome do paciente:");
+                                String nomeAlterar = inputString.nextLine();
+                                System.out.println("\nDigite a nova idade do paciente:");
+                                String idadeAlterar = inputString.nextLine();
+                                System.out.println("\nDigite o novo gênero do paciente:");
+                                String generoAlterar = inputString.nextLine();
+                                try {
+                                    cliente.alterarCliente(cpfAlterar, nomeAlterar, generoAlterar, idadeAlterar);
+                                } catch (Exception e) {
+                                    System.out.println("Erro ao alterar paciente: " + e.getMessage());
+                                }
+                            } else {
+                                System.out.println("\nVoltando ao menu...");
+                                break;
                             }
-                        } else {
-                            System.out.println("\nVoltando ao menu...");
-                            break;
-                        }
                         }
                     } catch (Exception e) {
                         System.out.println("Erro ao selecionar cliente: " + e.getMessage());
@@ -90,7 +90,8 @@ public class MenuCliente {
                                     System.out.println("Erro ao remover paciente: " + e.getMessage());
                                 }
                             } else {
-                                System.out.println("\nNenhum dado removido,v                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ''4512oltando ao menu...");
+                                System.out.println(
+                                        "\nNenhum dado removido,v                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ''4512oltando ao menu...");
                                 break;
                             }
                         }

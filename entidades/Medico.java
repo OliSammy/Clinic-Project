@@ -1,18 +1,19 @@
 package entidades;
+
 public class Medico {
     private String nome;
     private String especialidade;
+
     public Medico(String nome, String especialidade) {
         this.nome = nome;
         this.especialidade = especialidade;
     }
-   
-    
+
     @Override
     public String toString() {
         return "\nNome: " + this.nome + "\nEspecialidade: " + this.especialidade + "\n";
     }
-    
+
     public String getNome() {
         return nome;
     }
