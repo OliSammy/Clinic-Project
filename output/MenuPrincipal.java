@@ -16,7 +16,7 @@ public class MenuPrincipal {
 
     public void Inicio() throws Exception {
         while (true) {
-            System.out.println("\nBem-Vindo à Clinica dos Viados");
+            System.out.println("\nBem-Vindo à Clinica dos Felas!");
             System.out.println("\nPara prosseguimos com o programa selecione uma opção abaixo:");
             System.out.println("\n1.Médicos 2.Paciente 3.Agendamentos 4.Relatórios 5.sair\n\n");
             opcao = inputInt.nextInt();
