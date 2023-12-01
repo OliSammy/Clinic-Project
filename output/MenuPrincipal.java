@@ -8,6 +8,7 @@ public class MenuPrincipal {
     Scanner inputInt = new Scanner(System.in);
     MenuMedico menuMedico = new MenuMedico();
     MenuCliente menuCliente = new MenuCliente();
+    MenuAgendamento menuAgendamento = new MenuAgendamento();
 
     public MenuPrincipal() {
         menuMedico = new MenuMedico();
@@ -31,7 +32,7 @@ public class MenuPrincipal {
                     menuCliente.mostrarPacientes();
                     break;
                 case 3:
-                    mostrarConsultas();
+                    menuAgendamento.mostrarAgendamentos();
                 case 4:
                     mostrarRelatorio();
                     break;

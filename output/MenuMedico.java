@@ -1,6 +1,7 @@
 package output;
 
 import java.util.Scanner;
+
 import controladores.Staff;
 
 public class MenuMedico {

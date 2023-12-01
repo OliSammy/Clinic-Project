@@ -1,7 +1,6 @@
 package Sql;
 
 import java.sql.*;
-import Sql.SqlConnection;
 
 public class SqlMedico {
     Connection connection = null;
@@ -34,6 +33,8 @@ public class SqlMedico {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Nenhum resultado encontrado.");
+            comandossql.close();
+            connection.close();
             return false;
         } else {
             while (resultado.next()) {
@@ -67,6 +68,8 @@ public class SqlMedico {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Não existe médicos cadastrados.");
+            comandossql.close();
+            connection.close();
         } else {
             while (resultado.next()) {
                 System.out.println("\nID: " + resultado.getInt("Id_med") + "\nNome: " + resultado.getString("Nome")

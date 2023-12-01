@@ -90,8 +90,7 @@ public class MenuCliente {
                                     System.out.println("Erro ao remover paciente: " + e.getMessage());
                                 }
                             } else {
-                                System.out.println(
-                                        "\nNenhum dado removido,v                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ''4512oltando ao menu...");
+                                System.out.println("\nNenhum dado removido, voltando ao menu...");
                                 break;
                             }
                         }

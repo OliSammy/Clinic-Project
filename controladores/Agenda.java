@@ -1,52 +1,47 @@
 package controladores;
 
-import java.util.ArrayList;
-import entidades.Agendamento;
+import Sql.SqlAgendamento;;
 
 public class Agenda {
-    public ArrayList<Agendamento> agenda = new ArrayList<Agendamento>();
+    private SqlAgendamento sql = new SqlAgendamento();
 
-    public void adicionarAgendamento(Agendamento agendamento) {
-        verificarAgendamento(agendamento);
-        this.agenda.add(agendamento);
-    }
-
-    public void removerAgendamento(Agendamento agendamento) {
-        this.agenda.remove(agendamento);
-    }
-
-    public void buscarAgendamento(int id) {
-        for (Agendamento agendamento : this.agenda) {
-            if (agendamento.getId() == id) {
-                agendamento.exibirAgenda();
-                return;
-            }
+    public void adicionarAgendamento(int consultaRealizada, String data, String horario, int idMedico, long cpf)
+            throws Exception {
+        if (sql.verificarAgendamento(data, horario)) {
+            System.out.println("Horario e data indisponíveis");
+        } else {
+            sql.agendarConsulta(consultaRealizada, data, horario, idMedico, cpf);
+            System.out.println("Consulta Marcada!");
         }
-        System.out.println("Agendamento não encontrado!");
     }
 
-    public void verificarAgendamento(Agendamento agendamento) {
-        for (Agendamento agendamentoCadastrado : this.agenda) {
-            if (agendamentoCadastrado.getId() == agendamento.getId()) {
-                System.out.println("Agendamento já cadastrado!");
-                return;
-            }
-        }
-        System.out.println("Agendamento não cadastrado!");
+    public void removerAgendamento(String data, String horario) throws Exception {
+        // if (sql.verificarAgendamento(data, horario)) {
+        // sql.cancelarAgendamento(data, horario);
+        // System.out.println("\n\nConsulta Cancelada!\n\n");
+        // } else {
+        // System.out.println("\n\nConsulta Não Encontrada!\n\n");
+        // }
+        sql.cancelarAgendamento(data, horario);
     }
 
-    public void alterarAgendamento(Agendamento agendamento) {
-        for (Agendamento agendamentoCadastrado : this.agenda) {
-            if (agendamentoCadastrado.getId() == agendamento.getId()) {
-                agendamentoCadastrado.setPaciente(agendamento.getPaciente());
-                agendamentoCadastrado.setMedico(agendamento.getMedico());
-                agendamentoCadastrado.setData(agendamento.getData());
-                agendamentoCadastrado.setHora(agendamento.getHora());
-                agendamentoCadastrado.setEspecialidade(agendamento.getEspecialidade());
-                System.out.println("Agendamento alterado com sucesso!");
-                return;
-            }
+    public boolean selecionarAgendamento(String data, String horario) throws Exception {
+        if (sql.verificarAgendamento(data, horario)) {
+            return true;
+        } else {
+            return false;
         }
-        System.out.println("Agendamento não encontrado!");
     }
+
+    // public void buscarAgendamento() {
+
+    // }
+
+    // public void verificarAgendamento() {
+
+    // }
+
+    // public void alterarAgendamento() {
+
+    // }
 }

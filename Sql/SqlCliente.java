@@ -2,8 +2,6 @@ package Sql;
 
 import java.sql.*;
 
-import Sql.SqlConnection;
-
 public class SqlCliente {
 
     Connection connection = null;
@@ -60,6 +58,8 @@ public class SqlCliente {
         comandossql.setLong(1, cpf);
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
+            comandossql.close();
+            connection.close();
             return false;
         } else {
             while (resultado.next()) {
@@ -82,6 +82,8 @@ public class SqlCliente {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Nenhum resultado encontrado.");
+            comandossql.close();
+            connection.close();
             return false;
         } else {
             while (resultado.next()) {
@@ -117,6 +119,8 @@ public class SqlCliente {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Não existe pacientes cadastrados.");
+            comandossql.close();
+            connection.close();
         } else {
             while (resultado.next()) {
                 System.out.println("\nCPF: " + resultado.getLong("CPF") + "\nNome: " + resultado.getString("Nome")
