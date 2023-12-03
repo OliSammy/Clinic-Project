@@ -26,7 +26,7 @@ public class SqlMedico {
         connection.close();
     }
 
-    public boolean selecionarMedico(int id) throws SQLException {
+    public boolean verificaridMedico(int id) throws SQLException {
         connection = DriverManager.getConnection(url);
         PreparedStatement comandossql = connection.prepareStatement("SELECT * FROM Medico WHERE Id_med = ?");
         comandossql.setInt(1, id);
@@ -49,7 +49,8 @@ public class SqlMedico {
         connection.close();
         return true;
     }
-    public boolean verificaridMedico(int id) throws SQLException {
+
+    public boolean selecionarMedico(int id) throws SQLException {
         connection = DriverManager.getConnection(url);
         PreparedStatement comandossql = connection.prepareStatement("SELECT * FROM Medico WHERE Id_med = ?");
         comandossql.setInt(1, id);

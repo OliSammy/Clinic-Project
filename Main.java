@@ -1,6 +1,4 @@
 
-
-
 import output.MenuPrincipal;
 
 //Dividas técnicas:
@@ -11,6 +9,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
         MenuPrincipal menu = new MenuPrincipal();
         menu.Inicio();
-        
+
     }
 }
