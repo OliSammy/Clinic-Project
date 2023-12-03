@@ -18,9 +18,9 @@ public class MenuAgendamento {
             System.out.println("\t\t\n*Menu de Agendamentos selecionado*");
             System.out.println("\nSelecione uma opção abaixo:");
             System.out.println(
-                    "\n1.Agendar 2.Realizar Consulta 3.Cancelar 4.Buscar Consulta(Medico) 5.Buscar Consulta(Paciente) 6.voltar\n\n");
+                    "\n1.Agendar 2.Alterar Agendamento 3.Realizar Consulta 4.Cancelar 5.Buscar Consulta(Medico) 6.Buscar Consulta(Paciente) 7.voltar\n\n");
             opcao = inputInt.nextInt();
-            if (opcao == 6) {
+            if (opcao == 7) {
                 break;
             }
             switch (opcao) {
@@ -65,10 +65,119 @@ public class MenuAgendamento {
                         System.out.println("Erro ao marcar consulta: " + e.getMessage());
                     }
                     break;
-
                 case 2:
-                    break;
+                    System.out.println("\t\t\n*Alterar Agendamento*");
+                    System.out.println("\nDigite o seu CPF:(somente números)");
+                    long cpfAlterar;
+                    try {
+                        cpfAlterar = inputLong.nextLong();
+                        if (!agenda.verificarCpfCliente(cpfAlterar)) {
+                            System.out.println("\nErro: CPF não encontrado");
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("\nErro você deve digitar um número inteiro: ");
+                        inputInt.nextLine(); // Limpa o buffer do scanner
+                        break;
+                    }
+                    System.out.println("\nDigite o ID do Medico com quem você quer se alterar:");
+                    int idMedAlterar;
+                    try {
+                        idMedAlterar = inputInt.nextInt();
+                        if (!agenda.verificaridMedico(idMedAlterar)) {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("\nErro você deve digitar um número inteiro: ");
+                        inputInt.nextLine(); // Limpa o buffer do scanner
+                        break;
+                    }
+                    System.out.println("\nDiga a data da consulta que deseja alterar: (no formato dd/mm//yyyy)");
+                    String dataStringAlterar = inputString.nextLine();
+                    System.out.println("\nDiga o horario da consulta que deseja alterar:");
+                    System.out.println("\n1.14h 2.15h 3.16h 4.17h\n\n");
+                    int opcaoHorarioAlterar = inputInt.nextInt();
+                    String horarioAlterar = (String) agenda.obterHorario(opcaoHorarioAlterar);
+                    try {
+                        if (agenda.selecionarAgendamento(idMedAlterar, dataStringAlterar, horarioAlterar)) {
+                            System.out.println("\nDeseja alterar? 1.Sim 2.Não");
+                            int opcaoAlterar = inputInt.nextInt();
+                            if (opcaoAlterar == 1) {
+                                System.out.println("\nDigite a nova data da consulta que deseja alterar: (no formato dd/mm//yyyy)");
+                                String dataStringAlterar2 = inputString.nextLine();
+                                System.out.println("\nDigite o novo horario da consulta que deseja alterar:");
+                                System.out.println("\n1.14h 2.15h 3.16h 4.17h\n\n");
+                                int opcaoHorarioNovo = inputInt.nextInt();
+                                String horarioNovo = (String) agenda.obterHorario(opcaoHorarioNovo);
+                                try {
+                                    if(agenda.verificarAgendamento(idMedAlterar, dataStringAlterar2, horarioNovo)){
+                                        System.out.println("\nErro: Agendamento já existente");
+                                        break;
+                                    }
+                                    agenda.alterarAgendamento(idMedAlterar, dataStringAlterar, horarioAlterar,
+                                            dataStringAlterar2, horarioNovo);
+                                } catch (Exception e) {
+                                    System.out.println("Erro ao alterar agendamento: " + e.getMessage());
+                                }
+                            } else {
+                                System.out.println("\nNenhum dado alterado, voltando ao menu...");
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Erro ao selecionar agendamento: " + e.getMessage());
+                    }
+                   
+                break;
                 case 3:
+                    System.out.println("\t\t\n*Realizar Consulta*");
+                    System.out.println("\nDigite o ID do Medico com quem você vai realizar a consulta:");
+                    int idMedRealizar;
+                    try {
+                        idMedRealizar = inputInt.nextInt();
+                        if (!agenda.verificaridMedico(idMedRealizar)) {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("\nErro você deve digitar um número inteiro: ");
+                        inputInt.nextLine(); // Limpa o buffer do scanner
+                        break;
+                    }
+                    System.out.println("\nDiga a data da consulta que deseja realizar: (no formato dd/mm//yyyy)");
+                    String dataStringRealizar = inputString.nextLine();
+                    System.out.println("\nDiga o horario da consulta que deseja realizar:");
+                    System.out.println("\n1.14h 2.15h 3.16h 4.17h\n\n");
+                    int opcaoHorarioRealizar = inputInt.nextInt();
+                    String horarioRealizar = (String) agenda.obterHorario(opcaoHorarioRealizar);
+                    if (!agenda.verificarAgendamento(idMedRealizar, dataStringRealizar, horarioRealizar)) {
+                        System.out.println("\nErro: Agendamento não encontrado");
+                        break;
+                    }
+                    try {
+                        if (agenda.selecionarAgendamento(idMedRealizar, dataStringRealizar, horarioRealizar)) {
+                            System.out.println("\nDeseja realizar? 1.Sim 2.Não");
+                            int opcaoRealizar = inputInt.nextInt();
+                            if (opcaoRealizar == 1) {
+                                int Id_consulta=  (agenda.obterIdConsulta(idMedRealizar, dataStringRealizar, horarioRealizar));
+                                System.out.println("\nDigite o remédio(Se houver):");
+                                String tratamento = inputString.nextLine();
+                                System.out.println("\nDigite a descrição da consulta que deseja realizar:");
+                                String descricao = inputString.nextLine();
+                                try {
+                                    agenda.realizarConsulta(Id_consulta, tratamento, descricao);
+                                } catch (Exception e) {
+                                    System.out.println("Erro ao realizar consulta: " + e.getMessage());
+                                }
+                            } else {
+                                System.out.println("\nNenhum dado alterado, voltando ao menu...");
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Erro ao selecionar agendamento: " + e.getMessage());
+                    }
+                    break;           
+                case 4:
                     System.out.println("\t\t\n*Cancelar Consulta*");
                     System.out.println("\nDigite o ID do Medico com quem você quer se cancelar:");
                     int idMedCancel;
@@ -109,7 +218,7 @@ public class MenuAgendamento {
                     }
                     break;
 
-                case 4:
+                case 5:
                     System.out.println("\t\t\n*Buscar Consulta(Medico)*");
                     System.out.println("\nDigite o ID do Medico com quem você quer buscar:");
                     int idMedBusca;
@@ -139,7 +248,7 @@ public class MenuAgendamento {
 
                     }
                     break;
-                    case 5:
+                    case 6:
                     System.out.println("\t\t\n*buscar Consulta(Paciente)*");
                     System.out.println("\nDigite o CPF de quem você quer buscar:");
                     long cpfBuscar;

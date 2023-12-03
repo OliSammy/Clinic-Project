@@ -22,7 +22,21 @@ public class Agenda {
             System.out.println("Consulta agendada com sucesso");
         }
     }
-
+    public void realizarConsulta(int Id_consulta,  String tratamento,String descricao) throws Exception {
+        if (Id_consulta == -1) {
+            System.out.println("ERRO:Consulta não realizada.");
+        }else{         
+        
+        sql.realizarConsulta(Id_consulta, tratamento, descricao);
+        System.out.println("Consulta realizada com sucesso");
+    }
+}
+    public void alterarAgendamento(int idMedAlterar, String dataAlterae, String horarioAlterar,String datanova,String horarionovo) throws Exception {
+     
+            sql.alterarAgendamento(idMedAlterar, dataAlterae, horarioAlterar,datanova,horarionovo);
+            System.out.println("Consulta alterada com sucesso");
+        
+    } 
     public void removerAgendamento(int idMed, String data, String horario) throws Exception {
 
         sql.cancelarAgendamento(idMed, data, horario);
@@ -66,6 +80,12 @@ public class Agenda {
         } else
             return false;
         }
+    public boolean verificarAgendamento(int idMed, String data, String horario) throws Exception {
+        if (sql.verificarAgendamento(idMed, data, horario)) {
+            return true;
+        } else
+            return false;
+    }
     public void buscarAgendamentoCpf(long cpf) throws Exception {
         sql.buscarAgendamentoCpf(cpf);
     }
@@ -76,7 +96,9 @@ public class Agenda {
         } else
             return false;
     }
-
+    public int obterIdConsulta(int idMed, String data, String horario) throws Exception {
+        return sql.obterIdConsulta(idMed, data, horario);
+    }
 }
 
 

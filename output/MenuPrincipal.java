@@ -18,7 +18,7 @@ public class MenuPrincipal {
             while (true) {
             System.out.println("\nBem-Vindo à Clinica dos Felas!");
             System.out.println("\nPara prosseguimos com o programa selecione uma opção abaixo:");
-            System.out.println("\n1.Médicos 2.Paciente 3.Agendamentos 4.Relatórios 5.sair\n\n");
+            System.out.println("\n1.Médicos 2.Paciente 3.Agendamentos 4.sair\n\n");
             try {
                 try {
                     opcao = inputInt.nextInt();
@@ -27,7 +27,7 @@ public class MenuPrincipal {
                     inputInt.nextLine(); // Limpa o buffer do scanner
                     continue;
                 }
-                if (opcao == 5) {
+                if (opcao == 4) {
                     System.out.println("\nObrigado por usar o programa!");
                     break;
                 }
@@ -40,9 +40,6 @@ public class MenuPrincipal {
                         break;
                     case 3:
                         menuAgendamento.mostrarAgendamentos();
-                        break;
-                    case 4:
-                        mostrarRelatorio();
                         break;
                     default:
                         System.out.println("\nOpção inválida, tente novamente!");
