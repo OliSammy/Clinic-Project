@@ -49,6 +49,29 @@ public class SqlMedico {
         connection.close();
         return true;
     }
+    public boolean verificaridMedico(int id) throws SQLException {
+        connection = DriverManager.getConnection(url);
+        PreparedStatement comandossql = connection.prepareStatement("SELECT * FROM Medico WHERE Id_med = ?");
+        comandossql.setInt(1, id);
+        ResultSet resultado = comandossql.executeQuery();
+        if (!resultado.isBeforeFirst()) {
+            System.out.println("Nenhum resultado encontrado.");
+            comandossql.close();
+            connection.close();
+            return false;
+        } else {
+            while (resultado.next()) {
+                System.out.println("\nEsse é o médico buscado:");
+                System.out.println("\nID: " + resultado.getInt("Id_med") + "\nNome: " + resultado.getString("Nome")
+                        + "\nEspecialidade: " + resultado.getString("especialidade"));
+            }
+
+        }
+        resultado.close();
+        comandossql.close();
+        connection.close();
+        return true;
+    }
 
     public void alterarMedico(int id, String nome, String especialidade) throws SQLException {
         connection = DriverManager.getConnection(url);

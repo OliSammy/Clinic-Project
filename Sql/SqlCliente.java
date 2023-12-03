@@ -69,7 +69,6 @@ public class SqlCliente {
                         + resultado.getString("Data_de_Nascimento"));
             }
         }
-        comandossql.executeUpdate();
         comandossql.close();
         connection.close();
         return true;

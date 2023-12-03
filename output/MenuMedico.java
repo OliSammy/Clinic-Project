@@ -14,12 +14,13 @@ public class MenuMedico {
 
     }
 
-    public void mostrarMedicos() throws Exception {
+    public void mostrarMedicos() {
         while (true) {
 
             System.out.println("\t\t\n*Menu Médicos selecionado*");
             System.out.println("\nSelecione uma opção abaixo:");
             System.out.println("\n1.Cadastrar 2.Alterar 3.Remover 4.Perquisar 5.Listar 6.voltar\n\n");
+            try {
             opcao = inputInt.nextInt();
             if (opcao == 6) {
                 break;
@@ -45,7 +46,14 @@ public class MenuMedico {
                 case 2:
                     System.out.println("\t\t\n*Alterar Médico selecionado*");
                     System.out.println("\nDigite o ID do médico que deseja alterar:");
-                    int idAlterar = inputInt.nextInt();
+                    int idAlterar;
+                    try {
+                        idAlterar = inputInt.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("\nErro você deve digitar um número inteiro: ");
+                        inputInt.nextLine(); // Limpa o buffer do scanner
+                        break;
+                    }
                     try {
                         if (staff.selecionarMedico(idAlterar)) {
                             System.out.println("\nDeseja altera-lo? 1.Sim 2.Não");
@@ -62,17 +70,26 @@ public class MenuMedico {
                                 System.out.println("\nVoltando ao menu...");
                                 break;
                             }
+                        } else {
+                            System.out.println("\nMédico não encontrado!");
+                            break;
                         }
                     } catch (Exception e) {
                         System.out.println("Erro ao alterar médico: " + e.getMessage());
                         break;
                     }
-
                     // Remover Médico
                 case 3:
                     System.out.println("\t\t*Remover Médico selecionado*\n");
                     System.out.println("\nDigite o ID do médico que deseja remover:");
-                    int idRemover = inputInt.nextInt();
+                    int idRemover;
+                    try {
+                        idRemover = inputInt.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("\nErro você deve digitar um número inteiro: ");
+                        inputInt.nextLine(); // Limpa o buffer do scanner
+                        break;
+                    }
                     try {
                         if (staff.selecionarMedico(idRemover)) {
                             System.out.println("\nDeseja remove-lo? 1.Sim 2.Não");
@@ -95,7 +112,15 @@ public class MenuMedico {
                 case 4:
                     System.out.println("\t\t*Pesquisar Médico selecionado*\n");
                     System.out.println("\nDigite o ID do médico que deseja pesquisar:");
-                    int idPesquisar = inputInt.nextInt();
+                    int idPesquisar;
+
+                    try {
+                        idPesquisar = inputInt.nextInt();
+                    } catch (Exception e) {
+                        System.out.println("\nErro você deve digitar um número inteiro: ");
+                        inputInt.nextLine(); // Limpa o buffer do scanner
+                        break;
+                    }
                     try {
                         if (staff.selecionarMedico(idPesquisar)) {
                             break;
@@ -121,7 +146,11 @@ public class MenuMedico {
                     System.out.println("\nOpção inválida, tente novamente!");
                     break;
 
-            }
+                }
+            }catch (Exception e) {
+            System.out.println("\nOpção inválida, tente novamente!");
+            inputInt.nextLine(); // Limpa o buffer do scanner
         }
     }
+  }
 }

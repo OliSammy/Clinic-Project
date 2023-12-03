@@ -14,32 +14,43 @@ public class MenuPrincipal {
         menuMedico = new MenuMedico();
     }
 
-    public void Inicio() throws Exception {
-        while (true) {
+    public void Inicio() {
+            while (true) {
             System.out.println("\nBem-Vindo à Clinica dos Felas!");
             System.out.println("\nPara prosseguimos com o programa selecione uma opção abaixo:");
             System.out.println("\n1.Médicos 2.Paciente 3.Agendamentos 4.Relatórios 5.sair\n\n");
-            opcao = inputInt.nextInt();
-            if (opcao == 5) {
-                System.out.println("\nObrigado por usar o programa!");
-                break;
-            }
-            switch (opcao) {
-                case 1:
-                    menuMedico.mostrarMedicos();
-                    break;
-                case 2:
-                    menuCliente.mostrarPacientes();
-                    break;
-                case 3:
-                    menuAgendamento.mostrarAgendamentos();
-                case 4:
-                    mostrarRelatorio();
-                    break;
-                default:
+            try {
+                try {
+                    opcao = inputInt.nextInt();
+                } catch (Exception e) {
                     System.out.println("\nOpção inválida, tente novamente!");
-                    Inicio();
+                    inputInt.nextLine(); // Limpa o buffer do scanner
+                    continue;
+                }
+                if (opcao == 5) {
+                    System.out.println("\nObrigado por usar o programa!");
                     break;
+                }
+                switch (opcao) {
+                    case 1:
+                        menuMedico.mostrarMedicos();
+                        break;
+                    case 2:
+                        menuCliente.mostrarPacientes();
+                        break;
+                    case 3:
+                        menuAgendamento.mostrarAgendamentos();
+                        break;
+                    case 4:
+                        mostrarRelatorio();
+                        break;
+                    default:
+                        System.out.println("\nOpção inválida, tente novamente!");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("\nOpção inválida, tente novamente!");
+                inputInt.nextLine(); // Limpa o buffer do scanner
             }
         }
     }
