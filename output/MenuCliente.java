@@ -37,7 +37,6 @@ public class MenuCliente {
                     long cpf = inputLong.nextLong();
                     try {
                         cliente.adicionarCliente(nome, idade, genero, cpf);
-                        System.out.println("\nPaciente cadastrado com sucesso!");
                     } catch (Exception e) {
                         System.out.println("Erro ao adicionar paciente: " + e.getMessage());
                     }

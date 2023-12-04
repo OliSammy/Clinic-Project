@@ -49,7 +49,7 @@ public class SqlAgendamento {
     public String verificarAgendamentoadd(int idMed, long CPF, String data, String horario) throws SQLException {
         connection = DriverManager.getConnection(url);
         PreparedStatement comandossql = connection.prepareStatement(
-                "SELECT * FROM Consulta WHERE Data = ? AND Horario = ? AND Realizada = 0 AND CPF = ? OR Id_med = ?");
+                "SELECT * FROM Consulta WHERE Data = ? AND Horario = ? AND Realizada = 0 AND CPF = ? AND Id_med = ?");
         comandossql.setString(1, data);
         comandossql.setString(2, horario);
         comandossql.setLong(3, CPF);
@@ -128,36 +128,14 @@ public class SqlAgendamento {
                 .prepareStatement("UPDATE Consulta SET Realizada = 1 WHERE Id_consulta = ? AND Realizada = 0");
         comandossql.setInt(1, consultaId);
         comandossql.executeUpdate();
-        comandossql.close();
-        connection.close();
+        
         gerarRelatorio(consultaId, descricao, tratamento);
     }
-
-    public int obterIdConsulta(int idMed, String data, String horario) throws SQLException {
-        int consultaId = -1;
-        connection = DriverManager.getConnection(url);
-        PreparedStatement comandossql = connection
-                .prepareStatement("SELECT * FROM Consulta WHERE Data = ? AND Horario = ? AND Id_med = ? ");
-        comandossql.setString(1, data);
-        comandossql.setString(2, horario);
-        comandossql.setInt(3, idMed);
-        ResultSet resultado = comandossql.executeQuery();
-        if (!resultado.isBeforeFirst()) {
-            return consultaId;
-        } else {
-            consultaId = resultado.getInt("Id_consulta");
-            comandossql.close();
-            connection.close();
-            return consultaId;
-
-        }
-
-    }
-
+    
     public void gerarRelatorio(int consultaId, String descricao, String tratamento) throws SQLException {
         connection = DriverManager.getConnection(url);
         PreparedStatement comandossql = connection
-                .prepareStatement("INSERT INTO Relatorio (Id_consulta,Descricao, Tratamento) VALUES (?,?,?)");
+        .prepareStatement("INSERT INTO Relatorio (Id_consulta,Descricao, Tratamento) VALUES (?,?,?)");
         comandossql.setInt(1, consultaId);
         comandossql.setString(2, descricao);
         comandossql.setString(3, tratamento);
@@ -165,6 +143,27 @@ public class SqlAgendamento {
         comandossql.close();
         connection.close();
     }
+    
+        public int obterIdConsulta(int idMed, String data, String horario) throws SQLException {
+            int consultaId = -1;
+            connection = DriverManager.getConnection(url);
+            PreparedStatement comandossql = connection
+                    .prepareStatement("SELECT * FROM Consulta WHERE Data = ? AND Horario = ? AND Id_med = ? ");
+            comandossql.setString(1, data);
+            comandossql.setString(2, horario);
+            comandossql.setInt(3, idMed);
+            ResultSet resultado = comandossql.executeQuery();
+            if (!resultado.isBeforeFirst()) {
+                return consultaId;
+            } else {
+                consultaId = resultado.getInt("Id_consulta");
+                comandossql.close();
+                connection.close();
+                return consultaId;
+    
+            }
+    
+        }
 
     public void exibirRelatorio(int consultaId) throws SQLException {
         connection = DriverManager.getConnection(url);

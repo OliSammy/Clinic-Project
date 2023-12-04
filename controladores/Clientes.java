@@ -8,9 +8,10 @@ public class Clientes {
     public void adicionarCliente(String nome, String idade, String genero, long cpf) throws Exception {
         if (sql.verificarClienteExiste(cpf)) {
             System.out.println("Paciente já existe");
+            return;
         } else {
             sql.adicionarCliente(cpf, nome, genero, idade);
-            System.out.println("Cliente adicionado com sucesso");
+            System.out.println("Paciente adicionado com sucesso");
         }
     }
 
