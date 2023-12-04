@@ -65,12 +65,14 @@ public class SqlAgendamento {
             resultado.next(); // Move para a primeira linha do resultado
 
             boolean consultaDoMedico = resultado.getInt("Id_med") == idMed;
-            connection.close();
-            comandossql.close();
 
             if (consultaDoMedico) {
+                connection.close();
+                comandossql.close();
                 return "medico";
             } else {
+                connection.close();
+                comandossql.close();
                 return "paciente";
             }
         }
@@ -90,6 +92,8 @@ public class SqlAgendamento {
             comandossql.close();
             return false; // Nenhuma consulta encontrada para esse horário
         } else {
+            connection.close();
+            comandossql.close();
             return true;
         }
 
@@ -128,7 +132,8 @@ public class SqlAgendamento {
                 .prepareStatement("UPDATE Consulta SET Realizada = 1 WHERE Id_consulta = ? AND Realizada = 0");
         comandossql.setInt(1, consultaId);
         comandossql.executeUpdate();
-        
+        comandossql.close();
+        connection.close();        
         gerarRelatorio(consultaId, descricao, tratamento);
     }
     
@@ -154,6 +159,8 @@ public class SqlAgendamento {
             comandossql.setInt(3, idMed);
             ResultSet resultado = comandossql.executeQuery();
             if (!resultado.isBeforeFirst()) {
+                comandossql.close();
+                connection.close();
                 return consultaId;
             } else {
                 consultaId = resultado.getInt("Id_consulta");
@@ -173,6 +180,8 @@ public class SqlAgendamento {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Nenhum relatório encontrado.");
+            comandossql.close();
+            connection.close();
         } else {
             while (resultado.next()) {
                 System.out.println("\nEsse é o relatório da consulta:");
@@ -181,6 +190,8 @@ public class SqlAgendamento {
                                 + resultado.getString("Descricao")
                                 + "\nTratamento: " + resultado.getString("Tratamento"));
             }
+            comandossql.close();
+            connection.close();
         }
         comandossql.close();
         connection.close();
@@ -193,6 +204,8 @@ public class SqlAgendamento {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Nenhuma consulta encontrada.");
+            comandossql.close();
+            connection.close();
         } else {
             while (resultado.next()) {
                 System.out.println("\nEsse é o agendamento buscado:");
@@ -201,9 +214,9 @@ public class SqlAgendamento {
                                 + "\nId_med: " + resultado.getInt("Id_med") + "\nCPF: " + resultado.getLong("CPF"));
                 exibirRelatorio(resultado.getInt("Id_consulta"));
             }
+            comandossql.close();
+            connection.close();
         }
-        comandossql.close();
-        connection.close();
     }
 
     public void buscarAgendamentoIdmed(int idMed) throws SQLException {
@@ -214,6 +227,8 @@ public class SqlAgendamento {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Nenhuma consulta encontrada.");
+            comandossql.close();
+            connection.close();
         } else {
             while (resultado.next()) {
                 System.out.println("\nEssas são as consultas não realizadas do médico buscado:");
@@ -221,9 +236,9 @@ public class SqlAgendamento {
                         " Data: " + resultado.getString("Data") + "\nHorario: " + resultado.getString("Horario")
                                 + "\nId_med: " + resultado.getInt("Id_med") + "\nCPF: " + resultado.getLong("CPF"));
             }
-        }
         comandossql.close();
         connection.close();
+        }
     }
 
     public void buscarConsultasRealizadasPaciente(long cpf) throws SQLException {
@@ -234,6 +249,8 @@ public class SqlAgendamento {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Nenhuma consulta encontrada.");
+            comandossql.close();
+            connection.close();
         } else {
             while (resultado.next()) {
                 System.out.println("\nEssas são as consultas realizadas do paciente buscado:");
@@ -242,9 +259,9 @@ public class SqlAgendamento {
                                 + "\nId_med: " + resultado.getInt("Id_med") + "\nCPF: " + resultado.getLong("CPF"));
                 exibirRelatorio(resultado.getInt("Id_consulta"));
             }
-        }
         comandossql.close();
         connection.close();
+        }
     }
 
     public void buscarConsultasRealizadasMedico(int idMed) throws SQLException {
@@ -255,6 +272,8 @@ public class SqlAgendamento {
         ResultSet resultado = comandossql.executeQuery();
         if (!resultado.isBeforeFirst()) {
             System.out.println("Nenhuma consulta encontrada.");
+            comandossql.close();
+            connection.close();
         } else {
             while (resultado.next()) {
                 System.out.println("\nEssas são as consultas realizadas do médico buscado:");
@@ -263,9 +282,10 @@ public class SqlAgendamento {
                                 + "\nId_med: " + resultado.getInt("Id_med") + "\nCPF: " + resultado.getLong("CPF"));
                 exibirRelatorio(resultado.getInt("Id_consulta"));
             }
-        }
         comandossql.close();
         connection.close();
+            
+        }
     }
 
 }

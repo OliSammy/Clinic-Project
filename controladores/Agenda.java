@@ -25,10 +25,12 @@ public class Agenda {
     public void realizarConsulta(int Id_consulta,  String tratamento,String descricao) throws Exception {
         if (Id_consulta == -1) {
             System.out.println("ERRO:Consulta não realizada.");
+            return;
         }else{         
         
         sql.realizarConsulta(Id_consulta, tratamento, descricao);
         System.out.println("Consulta realizada com sucesso");
+        return;
     }
 }
     public void alterarAgendamento(int idMedAlterar, String dataAlterae, String horarioAlterar,String datanova,String horarionovo) throws Exception {

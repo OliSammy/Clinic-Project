@@ -18,7 +18,7 @@ public class MenuAgendamento {
             System.out.println("\t\t\n*Menu de Agendamentos selecionado*");
             System.out.println("\nSelecione uma opção abaixo:");
             System.out.println(
-                    "\n1.Agendar 2.Alterar Agendamento 3.Realizar Consulta 4.Cancelar 5.Buscar Consulta(Medico) 6.Buscar Consulta(Paciente) 7.voltar\n\n");
+                    "\n1.Agendar 2.Alterar Agendamento 3.Realizar Consulta 4.Cancelar Consulta 5.Buscar Consulta(Medico) 6.Buscar Consulta(Paciente) 7.voltar\n\n");
             opcao = inputInt.nextInt();
             if (opcao == 7) {
                 break;
@@ -158,11 +158,11 @@ public class MenuAgendamento {
                             System.out.println("\nDeseja realizar? 1.Sim 2.Não");
                             int opcaoRealizar = inputInt.nextInt();
                             if (opcaoRealizar == 1) {
-                                int Id_consulta=  (agenda.obterIdConsulta(idMedRealizar, dataStringRealizar, horarioRealizar));
+                                int Id_consulta=  (agenda.obterIdConsulta(idMedRealizar, dataStringRealizar, horarioRealizar));//Aqui ele pega o id da consulta que vai ser realizada
                                 System.out.println("\nDigite o remédio(Se houver):");
                                 String tratamento = inputString.nextLine();
                                 System.out.println("\nDigite a descrição da consulta que deseja realizar:");
-                                String descricao = inputString.nextLine();
+                                String descricao = inputString.nextLine(); 
                                 try {
                                     agenda.realizarConsulta(Id_consulta, tratamento, descricao);
                                 } catch (Exception e) {
